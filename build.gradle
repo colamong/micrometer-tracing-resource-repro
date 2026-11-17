@@ -1,0 +1,25 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    if (findProperty('bridgeVersion')) {
+        mavenLocal()
+    }
+    mavenCentral()
+}
+
+dependencies {
+    implementation "io.micrometer:micrometer-tracing-bridge-otel:${findProperty('bridgeVersion') ?: '1.6.8'}"
+    implementation 'io.opentelemetry:opentelemetry-exporter-otlp-common:1.55.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+application {
+    mainClass = 'repro.Main'
+}
