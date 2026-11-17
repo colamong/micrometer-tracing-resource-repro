@@ -27,5 +27,11 @@ Output with `micrometer-tracing-bridge-otel:1.6.8`:
   distinct payloads in 20 runs   : 6
 ```
 
+The last number varies between runs: the `ResourceSpans` order follows the identity hash
+codes of the freshly built `Resource` instances.
+
+`TraceRequestMarshaler` and `ResourceSpansMarshaler` are OpenTelemetry internal classes (the ones
+the OTLP exporters use), so the OpenTelemetry version is pinned to 1.55.0.
+
 To run against a locally published build: `./gradlew -q run -PbridgeVersion=<version>`
 (uses `mavenLocal()`).
